@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let correctButton = document.querySelector('.correct');
+                let incorrectButtons = document.querySelectorAll('.incorrect');
+
+                correctButton.addEventListener('click', function() {
+                    correctButton.style.backgroundColor = 'green';
+                    document.querySelector('#feedback1').innerHTML = 'Correct!';
+                    incorrectButtons.forEach(function(element) {
+                        element.disabled = true;
+                    });
+                });
+
+               incorrectButtons.forEach(function(element) {
+                    element.addEventListener('click', function() {
+                        element.style.backgroundColor = 'red';
+                        document.querySelector('#feedback1').innerHTML = 'Incorrect...';
+                        correctButton.disabled = true;
+                        incorrectButtons.forEach(function(element) {
+                            element.disabled = true;
+                        });
+                    });
+               });
+
+               let submitButton = document.querySelector('#check');
+               let inputField = document.querySelector('input');
+
+               submitButton.addEventListener('click', function() {
+                    if (document.querySelector('input').value.toLowerCase() == "france")
+                    {
+                        inputField.style.backgroundColor = 'green';
+                        document.querySelector('#feedback2').innerHTML = "Correct!";
+                    }
+                    else
+                    {
+                        inputField.style.backgroundColor = 'red';
+                        document.querySelector('#feedback2').innerHTML = "Incorrect...";
+                    }
+                    submitButton.disabled = true;
+               });
+
+            });
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3>What's the cause of my sadness?</h3>
+                <button class="incorrect">Alcoholism</button>
+                <button class="incorrect">Inflation</button>
+                <button class="correct">Greece</button>
+                <button class="incorrect">Children</button>
+                <button class="incorrect">Her</button>
+
+                <p id="feedback1"></p>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>I have a pig named Napoleon. Now I'm wanted in [...]</h3>
+                <input type="text"></input>
+                <button id="check">Check Answer</button>
+
+                <p id="feedback2"></p>
+            </div>
+        </div>
+    </body>
+</html>
